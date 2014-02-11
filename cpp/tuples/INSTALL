@@ -1,0 +1,66 @@
+********************************************************************************
+    File: INSTALL
+    
+    Comments: How to build the sources and run the program.
+    
+    History:
+        Oct-20-2005: Javier Fuchs                                   |\_/|   
+                     Phone (+54 2944) 525173                       /     \  
+                     http://southfox.servehttp.com                /_.~ ~,_\ 
+                                                                     \@/    
+********************************************************************************
+
++--------------------+
+| OBS                |
++--------------------+
+
+
+Compiler: tested in linux only
+       gcc/g++ (GCC) 3.2.2 20030222 - Red Hat 9 (i386) - kernel 2.4
+       gcc/g++ 3.3.3 20040412 - Fedora Core 2 (i686) - kernel 2.6.10
+       gcc/g++ 3.4.3 20050227 - Fedora Core 3 (i386) - kernel 2.6.12
+       gcc/g++ 4.0.0 20050519 - Fedora Core 4 (i686) - kernel 2.6.11
+       gcc/g++ 4.0.1 20050727 - Fedora Core 4 (x86_64) - kernel 2.6.12
+
+
++--------------------+
+| BUILDING           |
++--------------------+
+
+Howto compile the files under Linux:
+
+- USING GNU/MAKE
+  --------------
+1. Execute make using the file Tuple.mk
+      make -f Tuple.mk
+2. The next times, when you modify a source:
+      make -f Tuple.mk
+3. To clean (delete objects and executable files)
+      make -f Tuple.mk clean
+
+
+- USING AUTOCONF/AUTOMAKE
+  -----------------------
+
+1. Obtain e install aclocal/autoconf/automake (google.com o gnu.org). It's free.
+2. The first time, execute under command line and in the directory:
+      aclocal
+      autoconf
+      automake -a
+      ./configure
+      make 
+3. The next times, when you modify a source, only execute
+      make
+4. To clean (delete objects and executable files)
+      make clean
+
+
++--------------------+
+| TESTING            |
++--------------------+
+
+You can run the tests, executing in the command line:
+      ./runme.sh
+
+
+

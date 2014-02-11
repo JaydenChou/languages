@@ -1,0 +1,8 @@
+rem  Feb/2005: Javier Fuchs                                    |\_/|   
+rem            Phone (+54 2944) 525173                        /     \  
+rem            http://southfox.servehttp.com                 /_.~ ~,_\ 
+rem                                                             \@/    
+FOR /F "usebackq" %%i IN (`DIR /B novel`) do buildBooksNovels.exe novel/%%i en > BookEn_novel_%%i.html
+FOR /F "usebackq" %%i IN (`DIR /B novel`) do buildBooksNovels.exe novel/%%i sp > BookSp_novel_%%i.html
+FOR /F "usebackq" %%i IN (`DIR /B tech`) do buildBooksTechnical.exe tech/%%i en > BookEn_tech_%%i.html
+FOR /F "usebackq" %%i IN (`DIR /B tech`) do buildBooksTechnical.exe tech/%%i sp > BookSp_tech_%%i.html

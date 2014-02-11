@@ -1,0 +1,134 @@
+********************************************************************************
+    File: README
+    
+    Comments: Explanation of the project.
+    
+    History:
+        Oct-20-2005: Javier Fuchs                                   |\_/|   
+                     Phone (+54 2944) 525173                       /     \  
+                     http://southfox.servehttp.com                /_.~ ~,_\ 
+                                                                     \@/    
+********************************************************************************
+
+To build the project see INSTALL.
+
++--------------------+
+| THE PROJECT        |
++--------------------+
+
+The focus of this project is on C++, especially pointers, dynamic memory management, and operator overloading.
+
+
+Here are implemented two classes: Tuple and Set.
+
+Class Tuple
+-----------
+
+A tuple is a list of integers that has a particular order, so the tuple (1 2 3) is different from the tuple (2 3 1) since the elements are ordered differently. Duplicates are allowed, so (2 2 7) is a valid tuple. The elements of the tuples are integers, so each tuple is a sequence of ints. Since we don't know how many elements will be in a given tuple, it uses dynamic memory to implement the class.
+
+The implementation of class Tuple include the following public members and overloaded operators. In the following list, t and u are tuples and k is an int.
+
+1. The default constructor, which creates an empty tuple.
+2. The copy constructor, which makes a deep copy.
+3. The constructor Tuple(int k), which creates the tuple (0 1 2 ... k-1).
+4. The constructor Tuple(int *p, int k), which makes a tuple with the k elements from array p.
+5. The destructor.
+6. The overloaded assignment operator =, which makes a deep copy.
+7. The void function addElem(int k), which adds integer k to the end of the current tuple.
+8. The boolean function delElem(int k), which deletes the first occurrence of integer k from the current tuple, if it exists. If it exists, then return true, else return false.
+9. The class Size with the operator (), which returns the size of the tuple, as an integer.
+10. The following boolean operators:
+* t = u defined similarly.
+* t == u defined similarly.
+* t[k] returns the kth element of t if k is at least 0 and strictly smaller than the size of the tuple (so the entries in t are numbered starting from 0). If k is out of bounds, then the program report an error message and abort.
+* The stream insertion and extraction operators write out and read in tuples. A tuple is formatted as follows: first an open parenthesis: ( followed by one or more spaces, then a space-separated list of integers (the number of spaces between ints can vary), then one or more spaces, then a close parenthesis: ).
+
+Class Set
+---------
+A set is a collection of tuples. A set is defined as an unordered collection, so the sets {(1 2) (2 4 7)} and {(2 4 7) (1 2)} are identical. No duplicates are allowed, so {(1 2) (1 2) (6 4 9)} is not a valid set; instead it is represented as {(1 2) (6 4 9)}.
+
+As with Tuple, the implementation of class Set include the following public members and overloaded operators. In the following list, r and s are sets, t is a tuple, and k is an int.
+
+1. The default constructor, which creates an empty set.
+2. The copy constructor, which makes a deep copy.
+3. The constructor Set(Tuple t), which creates a set containing a single tuple t.
+4. The constructor Set(Tuple *p, int k), which makes a set with the k tuples from array p.
+5. The destructor.
+6. The overloaded assignment operator =, which makes a deep copy.
+7. The void function addTuple(Tuple t), which adds tuple t to the current set.
+8. The boolean function delTuple(Tuple t), which deletes tuple t from the current set, if it exists. If it exists, then return true, else return false.
+9. The class Size with the operator (), which returns the size of the set, as an integer.
+10. The following operators:
+* r + s returns the union of sets r and s, which is the set of tuples that appear in r or s. Note that due to the definition of a set, you need to remove any duplicate tuples before returning the union. E.g. if r = { ( 1 2 ) ( 9 4 3 ) } and s = { ( 6 8 1 ) ( 9 4 3 ) ( 15 ) }, then r + s = { ( 1 2 ) ( 9 4 3 ) ( 15 ) }.
+* r * s returns the intersection of sets r and s, which is the set of tuples that appear in r and s. E.g. if r = { ( 1 2 ) ( 9 4 3 ) } and s = { ( 6 8 1 ) ( 9 4 3 ) ( 15 ) }, then r * s = { ( 9 4 3 ) }.
+* r - s returns the set difference of sets r and s, which is the set of tuples that appear in r but not in s. E.g. if r = { ( 1 2 ) ( 9 4 3 ) } and s = { ( 6 8 1 ) ( 9 4 3 ) ( 15 ) }, then r - s = { ( 1 2 ) }.
+* r^s returns the symmetric difference of sets r and s, which is the set of tuples that appear in r or s, but not both. I.e. it's the same as (r - s) + (s - r). It's also the same as (r + s) - (r * s). E.g. if r = { ( 1 2 ) ( 9 4 3 ) } and s = { ( 6 8 1 ) ( 9 4 3 ) ( 15 ) }, then r^s = { ( 1 2 ) ( 6 8 1 ) ( 15 ) }.
+* r / s returns the Cartesian product of sets r and s, which means that you combine each tuple in r with each tuple in s. For example, if r = {(1 2 3) (4 5)} and s = {(6 7 8) (9) (10 11)}, then
+r / s = {(1 2 3 6 7 8) (1 2 3 9) (1 2 3 10 11) (4 5 6 7 8) (4 5 9) (4 5 10 11)}
+* r^k returns the Cartesian product of r with itself k times. For example, if r = {(1 2 3) (4 5)} then
+r^3 = (r / r) / r = {(1 2 3 1 2 3) (1 2 3 4 5) (4 5 1 2 3) (4 5 4 5)} / r
+= {(1 2 3 1 2 3 1 2 3) (1 2 3 1 2 3 4 5) (1 2 3 4 5 1 2 3) (1 2 3 4 5 4 5) (4 5 1 2 3 1 2 3) (4 5 1 2 3 4 5) (4 5 4 5 1 2 3) (4 5 4 5 4 5)}
+* r = s defined similarly.
+* r == s returns true if r and s are exactly the same set of tuples.
+* t % r returns true if tuple t is in set r and false otherwise.
+* ! r returns true if set r is empty and false otherwise.
+* r[k] returns the kth tuple (assuming the tuples are sorted) of r if k is at least 0 and strictly smaller than the size of the set (so the entries in t are numbered starting from 0). If k is out of bounds, then the program report an error message and abort.
+* The stream insertion and extraction operators write out and read in sets. A set is formatted as follows: first an open curly brace: { followed by one or more spaces, then a space-separated list of tuples formatted as above (the number of spaces between tuples can vary), then one or more spaces, then a close curly brace: }, e.g.:
+
+{ ( 2 5 7 ) ( 1 7 ) ( 7 1 ) }
+
+Notes:
+-------
+
+Since some of the methods will add and delete items from tuple and set objects, the implementation dynamically adjust the lengths of the arrays. Doing this as follows. It maintains two different notions of array size. The first is the number of items stored. Every time an insert or a delete occurs, this value will change. The second notion of size is the amount of memory it currently have allocated for the array. This value should be initialized to 4, and doubled each time it run out of room. If the number of entries stored in the array drops below size/4, then it  cut the size in half.
+
+In a project like that what I like is:
+•	Correctness: A software system that works as specified. I like to hand 
+separate files: subset.h (with the class definition and documentation), 
+subset.cpp (with the implementation), the file used to test the program 
+(test.cpp), and the makefile.
+•	Style and Documentation: Code that is maintainable. This means that 
+all classes used must be well-designed, functions used as appropriate, 
+documentation and code organization that makes the code clear to the next 
+person who will maintain the code. The interface needs to be fully 
+specified, and I mean every method. 
+The system is written and should work on a UNIX or LINUX platform. The code 
+is readable in a simple text editor like vi or emacs. In particular, I do 
+not let lines of text wrap (I make them 80 characters or less in general) 
+and I use several spaces (e.g. 4) instead of tabs to indent, since the tab 
+character is interpreted differently in different editors.
+
+
+Time Complexity:
+---------------
+I think the time complexity of every function, it's a question in C++, without response.
+For example, the time complexity for: analize the function (20%), programming (50 %), testing (30%).
+
+Class Tuple:
+::addElem (member function, public) it uses private function push_back(), 4 hours of programming (here we ask for memory)
+::delElem (member function, public) 30 minutes of time programming, because I'm using a STL to find and to delete the element.
+::operator (instream) >> (public) 5 hours, I never use this operator in my life of 10 years  of C++ programming. I think the next time I can do it in 15 minutes.
+::operator (outstream) << (public) 30 minutes, because it's very easy to do that, and I always use this operator (I don't like printfs)
+::operator[] 15 minutes, it's very easy
+::operator == 10 minutes,
+::operator = it uses a private member function ::assignment(), it takes me 2 hours
+The constructors & destructor only 30 minutes.
+
+Class Size, 1 hour or 2.
+
+Class Set
+::addElem (member function, public) it uses private function push_back(), 4 hours of programming (here we ask for memory)
+::delElem (member function, public) 30 minutes of time programming, because I'm using a STL to find and to delete the element.
+::operator (instream) >> (public) 2 hours.
+::operator (outstream) << (public) 5 minutes
+::operator[] 1 minute, it's a copy of Tuple::operator []
+::operator == 1 minute, a copy of the same operator in Tuple
+::operator = it uses a private member function ::assignment(), it takes me 2 hours
+::operator ! 2 minutes
+::operator ^ 5 minutes
+::operator / 3 hours (don't know why, I got confussed), I've reprogrammed this operator 4 times.
+
+The constructors & destructor only 30 minutes.
+
+********************************************************************************
+

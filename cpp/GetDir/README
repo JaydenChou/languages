@@ -1,0 +1,46 @@
+**************************************************************************
+File: README
+
+Compiler: 
+   __linux__: gcc/g++ (GCC) 3.2.2 20030222 - Red Hat 9 - kernel 2.4
+              gcc/g++ 4.0.1 20050727 - Fedora Core 4 - kernel 2.6.12
+    _WIN32:   Visual Studio 6.0 (MS Windows NT 2000 XP)
+
+History:
+   Feb/2005: Javier Fuchs                                    |\_/|   
+             Phone (+54 2944) 525173                        /     \  
+             http://southfox.servehttp.com                 /_.~ ~,_\ 
+                                                              \@/    
+
+**************************************************************************
+
++-------------+
+| UNDER LINUX |
++-------------+
+
+Howto compile the files under Linux:
+
+1. Obtain e install aclocal/autoconf/automake (google.com o gnu.org). It's free.
+2. The first time, execute under command line and in the directory:
+      aclocal
+      autoconf
+      automake -a
+      ./configure
+      gmake 
+3. The next times, when you modify a source, only execute
+      gmake
+4. run the programs
+      ./run.sh
+
+
++---------------+
+| UNDER WINDOWS |
++---------------+
+
+Howto compile the files under Windows:
+1. Open the file GetDir.dsw with Visual Studio 6.0 (under Windows 2000), and build the 2 projects
+3. Rename run_bat as run.bat
+      move run_bat run.bat
+2. run the programs
+      run.bat
+

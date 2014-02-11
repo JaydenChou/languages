@@ -1,0 +1,16 @@
+dnl **************************************************************************
+dnl File: configure.in
+dnl 
+dnl History:
+dnl   Feb/2005: Javier Fuchs                                    |\_/|   
+dnl             Phone (+54 2944) 525173                        /     \  
+dnl             http://southfox.servehttp.com                 /_.~ ~,_\ 
+dnl                                                              \@/    
+dnl
+dnl **************************************************************************
+AC_INIT(buildBooksNovels.cpp)
+AM_INIT_AUTOMAKE(buildBooksNovels,1)
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_INSTALL
+AC_OUTPUT(Makefile)

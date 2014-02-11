@@ -1,0 +1,280 @@
+*******************************************************************************
+*  File: README
+*  
+*  Comments: Read me file. 
+*            Here you have an explanation of this particular problem.
+*  
+*  Compiler: 
+*     gcc/g++ (GCC) 3.2.2 20030222 - Red Hat 9 (i386) - kernel 2.4
+*     gcc/g++ 3.3.3 20040412 - Fedora Core 2 (i686) - kernel 2.6.10
+*     gcc/g++ 3.4.3 20050227 - Fedora Core 3 (i386) - kernel 2.6.12
+*     gcc/g++ 4.0.0 20050519 - Fedora Core 4 (i686) - kernel 2.6.11
+*     gcc/g++ 4.0.1 20050727 - Fedora Core 4 (x86_64) - kernel 2.6.12
+*     WIN32: Visual Studio 6.0 (MS Windows 2000)
+*  
+*  History:
+*      Nov-16-2005: Javier Fuchs                                   |\_/|   
+*                   Phone (+54 2944) 525173                       /     \  
+*                   http://southfox.servehttp.com                /_.~ ~,_\ 
+*                                                                   \@/    
+******************************************************************************
+
+For build the project see: INSTALL.
+
+A subset problem is defined as follows. 
+In this problem, one is given a set S of n integers and another integer k. 
+The goal is to find a subset T of S such that the sum of the integers of T 
+exactly equals k (note that since the solution T is a set, no elements from S 
+may be repeated in a solution). 
+This problem is believed to be computationally hard, it is widely accepted 
+(though not formally proven) that any algorithm to solve this problem 
+takes exponential time in the worst case. 
+Here are implemented three solutions to this problem, the first will use 
+recursion, the second will use a stack, and the third will use a queue. 
+
+In the class subset there are the following public members: 
+
+subset::subset(int n=10);     // constructor: creates set with ints
+                              // {1, 2, ..., n}
+
+int *subset::find_solution_recursion(int k);  
+    // returns first solution 
+    // it finds recursively
+
+int *subset::find_solution_stack(int k);  
+    // returns first solution it finds
+    // iteratively, using a stack
+
+int *subset::find_solution_queue(int k);  
+    // returns first solution it finds
+    // iteratively, using a queue
+
+void subset::print();             // prints the last solution found
+
+void subset::print_all();          // prints all posible solution
+
+Above, n is the size of the set and k is an integer that is the "target" 
+of the sum. 
+
+The stack and the queue are part of the implementation, there is no use of 
+any built-in ones from e.g. STL. 
+
+At first queue and size, has a maximum, but when you add more elements, more
+memory is given. Thus it dynamically alter the size of the stack and queue. 
+Note that the three "solve" methods each return the first solution found. 
+There are multiple solutions to any problem, and if allowed to run, each 
+method find all solutions. 
+However, they might find them in different orders, and in diferent times.
+
+There is a time analysis of each of the "find_solution_..." methods. 
+Specifically, the worst-case (asymptotic) time complexity of each of this 
+approaches, is the solution using recursion, and (again, asymptotically) the 
+most most space (memory) that is required is in recursion too.
+
+In a project like that what I like is:
+•	Correctness: A software system that works as specified. I like to hand 
+separate files: subset.h (with the class definition and documentation), 
+subset.cpp (with the implementation), the file used to test the program 
+(test.cpp), and the makefile.
+•	Style and Documentation: Code that is maintainable. This means that 
+all classes used must be well-designed, functions used as appropriate, 
+documentation and code organization that makes the code clear to the next 
+person who will maintain the code. The interface needs to be fully 
+specified, and I mean every method. 
+The system is written and should work on a UNIX or LINUX platform. The code 
+is readable in a simple text editor like vi or emacs. In particular, I do 
+not let lines of text wrap (I make them 80 characters or less in general) 
+and I use several spaces (e.g. 4) instead of tabs to indent, since the tab 
+character is interpreted differently in different editors.
+
+Since no efficient algorithm is believed to exist, I implemented a "brute 
+force" algorithm that searches through all possible subsets of S until one 
+is found that sums exactly to k. 
+
+An algorithm for this problem is simple: 
+- retrieve a partial solution P from the data store, 
+- create all possible new (partial or final) solutions by adding different 
+elements to P, 
+- check each new solution for validity.
+- and then add each valid new partial solution to the data store. 
+
+With recursion, this is handled automatically; with stacks and queues, I need 
+to do it this explicitly. 
+You will see that find_solution_stack was converted to find_solution_queue 
+changing the data store, and working more in queue. 
+
+
+The Files:
+    subset.cpp, subset.h: the class subset
+    queue.cpp, queue.h: the queue
+    stack.cpp,  stack.h: the stack
+    utils.cpp, utils.h: some usefull functions
+    test.cpp, the testcase
+    Makefile, the makefile, to build the project
+
+
+Analysis:
+---------
+
+This is the analysis of the program, where you can contrast the methods in 
+terms of how they searched for solutions and which solution each discovered 
+first. 
+
+The system is fully implemented, I think, and is working properly.  Chossing 
+extreme simplicity (KISS: keep it simple stupid), as stateless as possible, 
+striping everything that is not strictly necessary.
+
+All the situations in the software are controlled, like deallocation of memory 
+(delete), or when a stack/queue is out of bounds, more memory is given.
+
+The time complexity for: analisis of every class was (20%), programming (50 %), 
+testing (30%).
+
+
+The solution Using a queue:
+---------------------------
+In this case is used the class queue, that implements a FIFO 
+(first-in-first-out) protocol. The only accesible object in the container is the
+one among that was inserted first (with the method Push()).
+
+In order to find solutions for a particular value, first you have to take care 
+of the values that generate the solutions:
+For example: S = ( 1 2 3 4 )
+This set of numbers generate 10 diferent solutions (or sums), and this solutions
+are created using 15 subsets of S (called Tn).
+[1] == 1
+[2] == 2
+[3] == 3 ; 1+2
+[4] == 4 ; 1+3
+[5] == 1+4 ; 2+3
+[6] == 1+2+3 ; 2+4
+[7] == 1+2+4 ; 3+4
+[8] == 1+3+4
+[9] == 2+3+4
+[10] == 1+2+3+4
+
+If you want a particular solution like:
+T = 1, you have only one subset S1 = { 1 };
+But, if you want T = 6.
+You have two subsets  { 1 2 3 } or { 2 4 }.
+
+The way the code is made to find this solutions is:
+- Creation of the Set, using the class subset in subset.cpp (the 
+  implementation), subset.h (the declaration)
+    subset::subset(int n);
+subset has a member
+    int* subset::data;
+that is initialiced between 1 and 4.
+There is a limit in the number, in the limit is the atribute: int size
+    size = 4 in this example
+Another atribute is used in this class: 
+    int subset::total;
+and it carries the limit of the generated numbers. 
+In this example total = 10 = 1 + 2 + 3 + 4
+
+Memory allocation is made for, In the particular example of the queue, the 
+member called:
+    queue *queueLastResult; // is an array (of 10 queues in our example).
+and for
+    int *data;              // is an array (of 4 integers in our example).
+
+
+When find_solution_queue(int k) is called, you want to find a Subset that sums 
+equal k.
+It's controlled that k is greather than 0 and is less equal to the limit of the 
+summatory (total).
+When k = total is specified the solution is quite easy, the set is returned.  
+    { 1 2 3 4 }
+
+The function generate_sums(queue*, int k) is giving all the numbers that 
+generate { 1 2 3 4 }.
+Looking k using iteration and save all the values in a queue, it's not an easy 
+task. Here is the explanation:
+
+- First we focus in k.
+If k is between 1 and 4, then the solution is easy, is one of the numbers of 
+the Set. If not, then I try a simple solution using the imagination:
+    If k = 7
+    You have to check this list:
+    Takes one value of the Set { 1,... }
+    Is 1 less than k = 7, then is a candidate for generate 7.
+    In a temporary queue (I've called this queue generator).
+    Push the particular value 1.
+    Now takes the following on the Set { .., 2, ..}.
+    And now, you have in generator = { 1 2 }. The sum of the values is equal 3.
+    if this sum of the generator is 7, then we have 2 candidates. It's not our example.
+    Then take the next on the Set { .., 3, ... }
+    Our generator has now 3 values: generator = { 1 2 3 }. The summatory is 6.
+    Now, what next?, on the Set  { ..., 4 }
+    But the summatory of the generator + 4 is greather than our k = 7.
+    Do not save 4.
+    Dequeue the last value (in our example is 3), and add 1.
+    Our new value is 4.
+    The generator has the following values: generator = { 1 2 }. Sumatory = 3
+    The summatory of the generator and 4, is our k = 7.
+    In the queueLastResult, add all the values of the generator, and 4.
+           queueLastResult[6] = { 1 2 4 }
+    And solution finded.
+
+The complication here, is when you dequeue (method Pop()) you get the first 
+value, then you have to take care of that. This is made using a temporary 
+queue, to save the values. Dequeueing all the values of generator, and adding 
+again this values to the generator, without the unneded value.
+
+Using a stack:
+-------------
+
+In find_solution_stack, the example is the same as queue, the only big 
+difference is when you pop a value (method Pop()) ,you obtain the last among 
+them that was inserted. Because a stack is a container that implements the 
+last-in-first-out (LIFO) protocol.
+And becuase you don't have to search the value in the whole container like in 
+queue, in our particular example, the method is more simple and fast.
+
+Using recursion:
+----------------
+
+The funcion I'm using is subset::recursive_combination() that generates all 
+posible combination. In our example:
+    S = { 1 2 3 4 }
+    It generates:
+    1 2 3 4
+    1 2 4 3
+    1 3 2 4
+    1 3 4 2
+    1 4 2 3
+    1 4 3 2
+
+    2 1 3 4
+    2 3 1 4
+    2 4 1 3
+    2 4 3 1
+    ...
+
+
+Then you have only to make partial sums, to search k = 7.
+    1+2 ...
+    1+2+3 ...
+    1+2+3+4 ... to big
+    1+2+4 -> EUREKA!!!
+    1+3 ...
+    1+3+2 ...
+    1+3+4 ... to big
+    ...
+
+Time Comparisson:
+-----------------
+
+In order to explain what are the problems between stack, queue, and recursion.
+Recursion is a powerfull programming technique that allows elegantly simple 
+solutions to dificult problems. But it can also be misused, producing inefficient code.
+
+For example: There are 55 results with 1023 posible solutions, 
+using this values: 1 2 3 4 5 6 7 8 9 10.
+
+- With recursion the operation takes 61.17 seconds to calculate this values.
+- Using a stack: The same operation takes 0.03 seconds.
+- Using a queue: 0.09 seconds.
+
+********************************************************************************
+

@@ -1,0 +1,24 @@
+dnl ****************************************************************************
+dnl   File: configure.in
+dnl   
+dnl   Comments: configurator
+dnl   
+dnl   Compiler: tested in linux only
+dnl      gcc/g++ (GCC) 3.2.2 20030222 - Red Hat 9 (i386) - kernel 2.4
+dnl      gcc/g++ 3.3.3 20040412 - Fedora Core 2 (i686) - kernel 2.6.10
+dnl      gcc/g++ 3.4.3 20050227 - Fedora Core 3 (i386) - kernel 2.6.12
+dnl      gcc/g++ 4.0.0 20050519 - Fedora Core 4 (i686) - kernel 2.6.11
+dnl      gcc/g++ 4.0.1 20050727 - Fedora Core 4 (x86_64) - kernel 2.6.12
+dnl   
+dnl   History:
+dnl      Oct-20-2005: Javier Fuchs                                   |\_/|   
+dnl                   Phone (+54 2944) 525173                       /     \  
+dnl                   http://southfox.servehttp.com                /_.~ ~,_\ 
+dnl                                                                   \@/    
+dnl ****************************************************************************
+AC_INIT(TupleTestDriver.cpp)
+AM_INIT_AUTOMAKE(TupleTestDriver,1)
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_INSTALL
+AC_OUTPUT(Makefile)
