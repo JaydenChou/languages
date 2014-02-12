@@ -1,0 +1,33 @@
+#*****************************************************************************
+#   File: README
+#   
+#   Comments: Instrucciones para compilar libreria Util
+#   
+#   Compilers: 
+#    1) Linux Argon 2.4.20-8smp #1 SMP Thu Mar 13 17:45:54 EST 2003 
+#       i686 i686 i386 GNU/Linux
+#       gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5)
+#    2) Linux acer 2.6.18-foxcastex.2798.fc6 #2 SMP Sat Feb 24 22:25:44 ART 2007 
+#       x86_64 x86_64 x86_64 GNU/Linux
+#       gcc version 4.1.1 20061011 (Red Hat 4.1.1-30)
+#   
+#*****************************************************************************/
+
+
+- Instructions:
+  - Construir la libreria Util
+  $ make -f bbbutil.mak
+  - clean
+  $ make -f bbbutil.mak clean
+  - Compila/Link por default con Debug, para generar sin debug:
+  $ make -f bbbutil.mak CFG=Release
+
+- Archivos:
+    README              Este archivo
+    bbbutil.vpj         Visual SlickEdit project file
+    bbbutil.mak         Makefile
+    Debug               Libreria y objetos con debug (lo crea el makefile)
+    Release             Libreria y objetos sin debug (lo crea el makefile)
+    shared              Directorio compartido con otros proyectos
+    src                 Fuentes
+

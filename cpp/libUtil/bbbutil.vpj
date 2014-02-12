@@ -1,0 +1,240 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+	Version="10.0"
+	VendorName="SlickEdit"
+	WorkingDir="."
+	BuildSystem="automakefile"
+	BuildMakeFile="%rp%rn.mak">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibbbbutil.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/DLINUX"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ -c %xup %defd -g -Wall -W -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions=" -Wno-deprecated -m32"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ %xup -g -shared -fPIC -Wall -o "%o" %objs %~other'
+					OtherOptions="-m32 -milp32 -Xlinker -h -Xlinker $(@F)"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir=".">
+				<Exec CmdLine="make -f bbbutil.mak clean rebuild"/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../shared/h"/>
+			<Include Dir="util/src"/>
+		</Includes>
+		<Libs PreObjects="0"/>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdlibbbbutil.so"
+		CompilerConfigName="Latest Version"
+		Defines='"/DLINUX"'>
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ -c %xup %defd -Wall -W -fPIC -o "%bd%n%oe" %i "%f" %~other'
+					OtherOptions=" -Wno-deprecated -m32"/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec
+					CmdLine='g++ %xup -shared -fPIC -Wall -o "%o" %objs %~other'
+					OtherOptions="-m32 -milp32 -Xlinker -h -Xlinker $(@F)"/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" CFG=%b'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='gmake -f "%rp%rn.mak" rebuild CFG=%b'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o" "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Includes>
+			<Include Dir="../shared/h"/>
+			<Include Dir="util/src"/>
+		</Includes>
+		<Libs PreObjects="0"/>
+	</Config>
+	<CustomFolders>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl"/>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.inc;*.sh;*.cpy;*.if"/>
+		<Folder
+			Name="Resource Files"
+			Filters="*.ico;*.cur;*.dlg"/>
+		<Folder
+			Name="Bitmaps"
+			Filters="*.bmp"/>
+		<Folder
+			Name="Other Files"
+			Filters="">
+		</Folder>
+	</CustomFolders>
+	<Files AutoFolders="DirectoryView">
+		<Folder Name="src">
+			<F N="src/BbbDate.cpp"/>
+			<F N="src/BbbDate.h"/>
+			<F N="src/BbbErrno.cpp"/>
+			<F N="src/BbbErrno.h"/>
+			<F N="src/BbbFile.cpp"/>
+			<F N="src/BbbFile.h"/>
+			<F N="src/BbbLog.cpp"/>
+			<F N="src/BbbLog.h"/>
+			<F N="src/BbbQueue.cpp"/>
+			<F N="src/BbbQueue.h"/>
+			<F N="src/BbbString.h"/>
+		</Folder>
+		<F
+			N="bbbutil.mak"
+			Type="Makefile"/>
+	</Files>
+</Project>

@@ -1,7 +1,7 @@
 //**************************************************************************
-// File: Utils.cpp
+// File: Common.cpp
 //
-// Description: Simple Functions
+// Description: Util Functions
 //
 // Compiler: 
 //    __linux__: gcc/g++ (GCC) 3.2.2 20030222 - Red Hat 9 - kernel 2.4
@@ -10,8 +10,8 @@
 //
 // History:
 //    Feb/2005: Javier Fuchs                                    |\_/|   
-//              Phone (+54 2944) 525173                        /     \  
-//              http://southfox.servehttp.com                 /_.~ ~,_\ 
+//                                                             /     \  
+//                                                            /_.~ ~,_\ 
 //                                                               \@/    
 //
 // **************************************************************************
