@@ -1,6 +1,7 @@
 <h1>Editing Article</h1>
 
-<%= link_to 'Back', articles_path %>
+<%= render 'toolbar' %>
+
 <%= form_for :article, url: article_path(@article), method: :patch do |f| %>
 	<% if @article.errors.any? %>
 	<div id="error_explanation">

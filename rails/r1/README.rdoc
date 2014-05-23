@@ -44,3 +44,4 @@ rails g controller articles
 rake routes
 bin/rake db:migrate RAILS_ENV=development --verbose
 
+./rails generate model Comment commenter:string body:text article:reference
