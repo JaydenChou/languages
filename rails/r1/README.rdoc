@@ -26,3 +26,21 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+=== Some commands
+
+#vim commands
+:Rails new r1
+:Rails!
+:Rlog
+:Rgenerate controller welcome index
+:Rgenerate resource articles
+:Rgenerate model Article title:string text:text 
+
+#shell commands
+rake rb:migrate
+rails generate model
+rails g controller articles
+rake routes
+bin/rake db:migrate RAILS_ENV=development --verbose
+
